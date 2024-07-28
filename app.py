@@ -64,6 +64,7 @@ async def upload_all(background_tasks: BackgroundTasks):
 
 
 
+
 # Run the server only if this file is executed directly
 if __name__ == "__main__":
     uvicorn.run(app, host="127.0.0.1", port=8000)
