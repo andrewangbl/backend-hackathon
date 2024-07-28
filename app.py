@@ -57,8 +57,8 @@ def summarize_and_upload_stock_news(supabase_client: Client):
 @app.post("/upload_all/")
 async def upload_all(background_tasks: BackgroundTasks):
     background_tasks.add_task(summarize_and_upload_sports_news, supabase)
-    # background_tasks.add_task(summarize_and_upload_tech_news, supabase)
-    # background_tasks.add_task(summarize_and_upload_stock_news, supabase)
+    background_tasks.add_task(summarize_and_upload_tech_news, supabase)
+    background_tasks.add_task(summarize_and_upload_stock_news, supabase)
     return {"message": "Uploading all news"}
 
 

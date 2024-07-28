@@ -87,6 +87,8 @@ def get_news_data_from_url(url):
     if not articles:
         articles = [div for div in soup.find_all('div') if div.find(['h1', 'h2', 'h3'])]
 
+    news_result = None  # Initialize news_result
+
     for el in articles:
         title_element = el.find('h1') or el.find('h2') or el.find('h3')
         link_element = el.find('a', href=True)
@@ -105,6 +107,12 @@ def get_news_data_from_url(url):
             "date": html.unescape(date_element.get_text(strip=True) if date_element else ''),
             "source": html.unescape(source_element.get_text(strip=True) if source_element else '')
         }
+        break  # Only process the first article
+
+    if news_result is None:
+        # If no article is found, return a default value or raise an exception
+        return {"link": "", "title": "", "article_text": "", "date": "", "source": ""}
+        # Or raise an exception: raise ValueError("No article found on the page")
 
     return news_result
 
